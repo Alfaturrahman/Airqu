@@ -1,3 +1,4 @@
+import 'package:airqu/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:airqu/widgets/splash.dart';
 import 'package:airqu/view/introduction.dart';
