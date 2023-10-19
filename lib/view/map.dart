@@ -211,10 +211,8 @@ class _MapPageState extends State<MapPage> {
                                               radius: 20,
                                               lineWidth: 8,
                                               animation: true,
-                                              progressColor: Color.fromARGB(
-                                                  255, 32, 146, 233),
-                                              backgroundColor: Color.fromARGB(
-                                                  255, 193, 55, 45),
+                                              progressColor: Color.fromARGB(255, 32, 146, 233),
+                                              backgroundColor: Color.fromARGB(255, 193, 55, 45),
                                               center: const Text(
                                                 '20%',
                                                 style: TextStyle(
