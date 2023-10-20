@@ -125,14 +125,7 @@ class _MapPageState extends State<MapPage> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    width: 200,
-                                    height: 125,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 232, 229, 215),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Row(
+                                    Row(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -226,72 +219,6 @@ class _MapPageState extends State<MapPage> {
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(15, 0, 0, 25),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Align(
-                                    alignment: AlignmentDirectional(1.00, 0.00),
-                                    child: Container(
-                                      width: 200,
-                                      height: 125,
-                                      decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 232, 229, 215),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Align(
-                                            alignment: AlignmentDirectional(
-                                                0.00, 0.00),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 0, 5),
-                                              child: Text(
-                                                'Tambahkan Lokasi',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            style: ButtonStyle(
-                                              foregroundColor:
-                                                  MaterialStateProperty.all<
-                                                          Color>(
-                                                      const Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                            ),
-                                            onPressed: () {},
-                                            child: const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.add_circle_outline,
-                                                  size: 30,
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -305,7 +232,7 @@ class _MapPageState extends State<MapPage> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(20, 5, 0, 0),
                           child: Text(
-                            'Lokasi Disematkan',
+                            'Terakhir Diperbarui..........',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.normal,
