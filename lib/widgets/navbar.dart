@@ -1,6 +1,5 @@
 import 'package:airqu/view/home.dart';
 import 'package:airqu/view/map.dart';
-import 'package:airqu/view/ramalan.dart';
 import 'package:airqu/view/setting.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    RamalanPage(),
     MapPage(),
     SettingsPage(),
   ];
@@ -39,10 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
               Icons.home,
             ),
             label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Ramalan',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map_outlined),
