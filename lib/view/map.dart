@@ -17,7 +17,7 @@ class _MapPageState extends State<MapPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Peta',
           style: TextStyle(color: Colors.black),
         ),
@@ -25,21 +25,21 @@ class _MapPageState extends State<MapPage> {
           Row(
             children: [
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.search_outlined,
                   color: Colors.black,
                 ),
                 onPressed: () {},
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10.0),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.mail_lock_outlined,
                   color: Colors.black,
                 ),
                 onPressed: () {},
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10.0),
             ],
           ),
         ],
@@ -71,13 +71,13 @@ class _MapPageState extends State<MapPage> {
                   InkWell(
                     onTap: () {},
                     child: Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 12.0),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 0, 204, 255),
+                        color: const Color.fromARGB(255, 0, 204, 255),
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.search,
                         color: Colors.white,
                       ),
@@ -92,7 +92,7 @@ class _MapPageState extends State<MapPage> {
                 width: MediaQuery.of(context).size.width,
                 height: 230,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 232, 229, 215),
+                  color: const Color.fromARGB(255, 232, 229, 215),
                   boxShadow: const [
                     BoxShadow(
                       blurRadius: 10,
@@ -111,7 +111,7 @@ class _MapPageState extends State<MapPage> {
                         width: MediaQuery.of(context).size.width,
                         height: 195,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 241, 239, 227),
+                          color: const Color.fromARGB(255, 241, 239, 227),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -129,7 +129,8 @@ class _MapPageState extends State<MapPage> {
                                     width: 200,
                                     height: 125,
                                     decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 232, 229, 215),
+                                      color: const Color.fromARGB(
+                                          255, 232, 229, 215),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Row(
@@ -211,8 +212,12 @@ class _MapPageState extends State<MapPage> {
                                               radius: 20,
                                               lineWidth: 8,
                                               animation: true,
-                                              progressColor: Color.fromARGB(255, 32, 146, 233),
-                                              backgroundColor: Color.fromARGB(255, 193, 55, 45),
+                                              progressColor:
+                                                  const Color.fromARGB(
+                                                      255, 32, 146, 233),
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      255, 193, 55, 45),
                                               center: const Text(
                                                 '20%',
                                                 style: TextStyle(
@@ -231,21 +236,22 @@ class _MapPageState extends State<MapPage> {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(15, 0, 0, 25),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  15, 0, 0, 25),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(1.00, 0.00),
+                                    alignment:
+                                        const AlignmentDirectional(1.00, 0.00),
                                     child: Container(
                                       width: 200,
                                       height: 125,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 232, 229, 215),
+                                        color: const Color.fromARGB(
+                                            255, 232, 229, 215),
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Column(
