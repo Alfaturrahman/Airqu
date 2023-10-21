@@ -189,43 +189,89 @@ class HomePage extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment
                                         .center, // Agar elemen-elemen dalam row kanan sejajar di tengah
                                     children: [
-                                      CircularPercentIndicator(
-                                        percent: 0.5,
-                                        radius: 40,
-                                        lineWidth: 15,
-                                        animation: true,
-                                        progressColor: const Color.fromARGB(
-                                            255, 32, 146, 233),
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 193, 55, 45),
-                                        center: const Text(
-                                          '20%',
-                                          style: TextStyle(
-                                            fontFamily: 'Outfit',
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
+                                      GestureDetector(
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: const Text(
+                                                  'Tentang AQI',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                content: SizedBox(
+                                                  width: screenWidth * 0.5,
+                                                  child: ListView(
+                                                    shrinkWrap: true,
+                                                    children: [
+                                                      const Padding(
+                                                        padding: EdgeInsets.all(
+                                                            16.0),
+                                                        child: Text(
+                                                          'Indeks Kualitas Udara (Air Quality Index atau AQI) adalah sebuah indeks yang menunjukkan indikasi polusi udara di lokasi tertentu. AQI adalah metode pengukuran global yang dimulai dari titik 0 di ujung paling bawah dan dapat melebihi 300 di ujung paling atas. Semakin tinggi nilai AQI, semakin tinggi tingkat polusi udara dan semakin tinggi risiko udara terhadap kesehatan kita.',
+                                                          style: TextStyle(
+                                                            fontSize: 14.0,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        width: 200.0,
+                                                        height: 220.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      16.0),
+                                                        ),
+                                                        child: Image.asset(
+                                                          'assets/Indikator.png',
+                                                          width:
+                                                              double.infinity,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text('Tutup'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child: CircularPercentIndicator(
+                                          percent: 0.5,
+                                          radius: 40,
+                                          lineWidth: 15,
+                                          animation: true,
+                                          progressColor: const Color.fromARGB(
+                                              255, 32, 146, 233),
+                                          backgroundColor: const Color.fromARGB(
+                                              255, 193, 55, 45),
+                                          center: const Text(
+                                            '20%',
+                                            style: TextStyle(
+                                              fontFamily: 'Outfit',
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                         ),
                                       ),
                                       const SizedBox(width: 10.0),
-                                      CircularPercentIndicator(
-                                        percent: 0.5,
-                                        radius: 40,
-                                        lineWidth: 15,
-                                        animation: true,
-                                        progressColor: const Color.fromARGB(
-                                            255, 32, 146, 233),
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 193, 55, 45),
-                                        center: const Text(
-                                          '20%',
-                                          style: TextStyle(
-                                            fontFamily: 'Outfit',
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ],
@@ -241,12 +287,20 @@ class HomePage extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                      'Klik bel untuk mendapatkan notifikasi dari area ini !'),
-                                  SizedBox(),
+                                  FittedBox(
+                                    fit: BoxFit
+                                        .scaleDown, // Mengatur teks agar sesuai dengan batas lebar
+                                    child: Text(
+                                      'Klik bel untuk mendapatkan notifikasi!',
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
                                   Icon(Icons.mark_email_unread_outlined),
                                 ],
-                              ),
+                              )
                             ],
                           ),
                         ),
@@ -579,7 +633,8 @@ class HomePage extends StatelessWidget {
                         child: Container(
                           width: screenWidth * 1,
                           height: 60,
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.fromLTRB(
+                              16.0, 8.0, 16.0, 8.0), // Mengurangi padding
                           decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.5),
                             borderRadius: const BorderRadius.only(
@@ -594,7 +649,7 @@ class HomePage extends StatelessWidget {
                                 'Mengapa Reboisasi itu penting?',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 22.0,
+                                  fontSize: 18.0, // Mengurangi ukuran teks
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -603,8 +658,13 @@ class HomePage extends StatelessWidget {
                                   // Aksi yang ingin Anda eksekusi ketika tombol ditekan
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    shape: const CircleBorder(),
-                                    backgroundColor: Colors.green),
+                                  shape: const CircleBorder(),
+                                  padding: const EdgeInsets.all(
+                                      8.0), // Mengurangi padding tombol
+                                  minimumSize: const Size(
+                                      40, 40), // Mengurangi ukuran tombol
+                                  backgroundColor: Colors.green,
+                                ),
                                 child:
                                     const Icon(Icons.arrow_right_alt_outlined),
                               )
