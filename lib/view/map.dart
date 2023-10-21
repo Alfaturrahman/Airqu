@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'detail_info.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -14,10 +13,12 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Peta',
           style: TextStyle(color: Colors.black),
         ),
@@ -25,29 +26,203 @@ class _MapPageState extends State<MapPage> {
           Row(
             children: [
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.search_outlined,
                   color: Colors.black,
                 ),
                 onPressed: () {},
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10.0),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.mail_lock_outlined,
                   color: Colors.black,
                 ),
                 onPressed: () {},
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10.0),
             ],
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Padding(
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                    ),
+                    child: SizedBox(
+                      height: 250,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            top: -5,
+                            left: 20,
+                            child: Card(
+                              color: Colors.red[600],
+                              elevation: 4.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                              child: Container(
+                                width: screenWidth * 0.8,
+                                height: 100.0,
+                                padding: const EdgeInsets.all(16.0),
+                                child: const Text(
+                                  'Terakhir Diperbaharui 13.15, 18 Okt 2023',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 35,
+                            left: 20,
+                            child: Card(
+                              elevation: 5.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                              color: Colors.grey[200],
+                              child: Container(
+                                width: screenWidth * 0.8,
+                                height: 200.0,
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Row(
+                                      children: [
+                                        Icon(Icons.maps_home_work),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text('Batam'),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 5.0),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceBetween, // Mengatur elemen agar sejajar
+                                      children: [
+                                        const Column(
+                                          crossAxisAlignment: CrossAxisAlignment
+                                              .start, // Agar elemen-elemen dalam kolom kiri sejajar di sebelah kiri
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'TIDAK SEHAT',
+                                                  style: TextStyle(
+                                                    fontSize: 25.0,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.red,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment
+                                                  .start, // Agar elemen-elemen dalam kolom kiri sejajar di sebelah kiri
+                                              children: [
+                                                Text('Untuk Group Sensitif'),
+                                                Text('516 Mengikuti'),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment
+                                              .center, // Agar elemen-elemen dalam row kanan sejajar di tengah
+                                          children: [
+                                            CircularPercentIndicator(
+                                              percent: 0.5,
+                                              radius: 40,
+                                              lineWidth: 15,
+                                              animation: true,
+                                              progressColor:
+                                                  const Color.fromARGB(
+                                                      255, 32, 146, 233),
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      255, 193, 55, 45),
+                                              center: const Text(
+                                                '20%',
+                                                style: TextStyle(
+                                                  fontFamily: 'Outfit',
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 10.0),
+                                            CircularPercentIndicator(
+                                              percent: 0.5,
+                                              radius: 40,
+                                              lineWidth: 15,
+                                              animation: true,
+                                              progressColor:
+                                                  const Color.fromARGB(
+                                                      255, 32, 146, 233),
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      255, 193, 55, 45),
+                                              center: const Text(
+                                                '20%',
+                                                style: TextStyle(
+                                                  fontFamily: 'Outfit',
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    const Divider(
+                                      color: Colors.black,
+                                      height: 30.0,
+                                    ),
+                                    const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            'Udara tidak baik gunakan masker jika keluar'),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            top: 16.0,
+            left: 16.0,
+            right: 16.0,
+            child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: <Widget>[
@@ -59,6 +234,8 @@ class _MapPageState extends State<MapPage> {
                           labelText: 'Cari Cuaca',
                           prefixIcon: Icon(Icons.search),
                           border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Colors.white,
                         ),
                         onChanged: (value) {
                           setState(() {
@@ -71,13 +248,15 @@ class _MapPageState extends State<MapPage> {
                   InkWell(
                     onTap: () {},
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 12.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                        vertical: 12.0,
+                      ),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 0, 204, 255),
+                        color: const Color.fromARGB(255, 0, 204, 255),
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.search,
                         color: Colors.white,
                       ),
@@ -86,167 +265,8 @@ class _MapPageState extends State<MapPage> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 230,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 232, 229, 215),
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 10,
-                      color: Color(0x33000000),
-                      offset: Offset(0, 3),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(20),
-                  shape: BoxShape.rectangle,
-                ),
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: const AlignmentDirectional(0.00, 0.94),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 195,
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 241, 239, 227),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  20, 0, 0, 25),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(10, 5, 0, 0),
-                                              child: Text(
-                                                '08 sept 2023',
-                                                style: TextStyle(
-                                                  fontFamily: 'Readex Pro',
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(15, 5, 0, 0),
-                                              child: Text(
-                                                'Batu Aji',
-                                                style: TextStyle(
-                                                  fontFamily: 'Readex Pro',
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(15, 5, 0, 0),
-                                              child: Text(
-                                                'Sedang',
-                                                style: TextStyle(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: Color.fromARGB(
-                                                      255, 240, 216, 0),
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(15, 5, 0, 0),
-                                              child: Text(
-                                                'Tetap Menjaga \nKesehatan',
-                                                style: TextStyle(
-                                                  fontFamily: 'Readex Pro',
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            const Row(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(30, 8, 0, 10),
-                                                  child: Icon(
-                                                    Icons.push_pin_outlined,
-                                                    color: Color.fromARGB(
-                                                        255, 0, 0, 0),
-                                                    size: 19,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            CircularPercentIndicator(
-                                              percent: 0.5,
-                                              radius: 20,
-                                              lineWidth: 8,
-                                              animation: true,
-                                              progressColor: Color.fromARGB(255, 32, 146, 233),
-                                              backgroundColor: Color.fromARGB(255, 193, 55, 45),
-                                              center: const Text(
-                                                '20%',
-                                                style: TextStyle(
-                                                  fontFamily: 'Outfit',
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 5, 0, 0),
-                          child: Text(
-                            'Terakhir Diperbarui..........',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
