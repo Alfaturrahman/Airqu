@@ -1,3 +1,4 @@
+import 'package:airqu/view/detail_info.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -10,10 +11,10 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
+        elevation: 3.0,
         backgroundColor: Colors.white,
         title: const Text(
-          'Ramalan Cuaca',
+          'Dashboard',
           style: TextStyle(color: Colors.black),
         ),
         actions: <Widget>[
@@ -31,7 +32,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(width: 10.0), // Menambahkan jarak horizontal
               IconButton(
                 icon: const Icon(
-                  Icons.mail_lock_outlined,
+                  Icons.mail,
                   color: Colors.black,
                 ),
                 onPressed: () {
@@ -43,10 +44,10 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 16.0), // Padding kanan dan kiri
+        padding: const EdgeInsets.only(
+            top: 10, right: 16, left: 16), // Padding kanan dan kiri
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,180 +133,194 @@ class HomePage extends StatelessWidget {
                       top: 35,
                       left: 20,
                       child: Card(
-                        elevation: 5.0,
+                        elevation: 10.0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16.0),
                         ),
                         color: Colors.grey[200],
-                        child: Container(
-                          width: screenWidth *
-                              0.8, // Menggunakan persentase lebar layar
-                          height: 200.0,
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Row(
-                                children: [
-                                  Icon(Icons.maps_home_work),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text('Batam'),
-                                ],
-                              ),
-                              const SizedBox(height: 5.0),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween, // Mengatur elemen agar sejajar
-                                children: [
-                                  const Column(
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .start, // Agar elemen-elemen dalam kolom kiri sejajar di sebelah kiri
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'TIDAK SEHAT',
-                                            style: TextStyle(
-                                              fontSize: 25.0,
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.red,
+                        child: GestureDetector(
+                          onTap: () {
+                            // Navigate to the "detailinfo" page when the Card is pressed
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const DetailInfo()),
+                            );
+                          },
+                          child: Container(
+                            width: screenWidth *
+                                0.8, // Menggunakan persentase lebar layar
+                            height: 200.0,
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Row(
+                                  children: [
+                                    Icon(Icons.maps_home_work),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text('Batam'),
+                                  ],
+                                ),
+                                const SizedBox(height: 5.0),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .spaceBetween, // Mengatur elemen agar sejajar
+                                  children: [
+                                    const Column(
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start, // Agar elemen-elemen dalam kolom kiri sejajar di sebelah kiri
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'TIDAK SEHAT',
+                                              style: TextStyle(
+                                                fontSize: 25.0,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.red,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .start, // Agar elemen-elemen dalam kolom kiri sejajar di sebelah kiri
-                                        children: [
-                                          Text('Untuk Group Sensitif'),
-                                          Text('516 Mengikuti'),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .center, // Agar elemen-elemen dalam row kanan sejajar di tengah
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text(
-                                                  'Tentang AQI',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                content: SizedBox(
-                                                  width: screenWidth * 0.5,
-                                                  child: ListView(
-                                                    shrinkWrap: true,
-                                                    children: [
-                                                      const Padding(
-                                                        padding: EdgeInsets.all(
-                                                            16.0),
-                                                        child: Text(
-                                                          'Indeks Kualitas Udara (Air Quality Index atau AQI) adalah sebuah indeks yang menunjukkan indikasi polusi udara di lokasi tertentu. AQI adalah metode pengukuran global yang dimulai dari titik 0 di ujung paling bawah dan dapat melebihi 300 di ujung paling atas. Semakin tinggi nilai AQI, semakin tinggi tingkat polusi udara dan semakin tinggi risiko udara terhadap kesehatan kita.',
-                                                          style: TextStyle(
-                                                            fontSize: 14.0,
-                                                            fontWeight:
-                                                                FontWeight.w400,
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment
+                                              .start, // Agar elemen-elemen dalam kolom kiri sejajar di sebelah kiri
+                                          children: [
+                                            Text('Untuk Group Sensitif'),
+                                            Text('516 Mengikuti'),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .center, // Agar elemen-elemen dalam row kanan sejajar di tengah
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                    'Tentang AQI',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  content: SizedBox(
+                                                    width: screenWidth * 0.5,
+                                                    child: ListView(
+                                                      shrinkWrap: true,
+                                                      children: [
+                                                        const Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  16.0),
+                                                          child: Text(
+                                                            'Indeks Kualitas Udara (Air Quality Index atau AQI) adalah sebuah indeks yang menunjukkan indikasi polusi udara di lokasi tertentu. AQI adalah metode pengukuran global yang dimulai dari titik 0 di ujung paling bawah dan dapat melebihi 300 di ujung paling atas. Semakin tinggi nilai AQI, semakin tinggi tingkat polusi udara dan semakin tinggi risiko udara terhadap kesehatan kita.',
+                                                            style: TextStyle(
+                                                              fontSize: 14.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Container(
-                                                        width: 200.0,
-                                                        height: 220.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      16.0),
+                                                        Container(
+                                                          width: 200.0,
+                                                          height: 220.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        16.0),
+                                                          ),
+                                                          child: Image.asset(
+                                                            'assets/Indikator.png',
+                                                            width:
+                                                                double.infinity,
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                         ),
-                                                        child: Image.asset(
-                                                          'assets/Indikator.png',
-                                                          width:
-                                                              double.infinity,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text('Tutup'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        },
-                                        child: CircularPercentIndicator(
-                                          percent: 0.5,
-                                          radius: 40,
-                                          lineWidth: 15,
-                                          animation: true,
-                                          progressColor: const Color.fromARGB(
-                                              255, 32, 146, 233),
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 193, 55, 45),
-                                          center: const Text(
-                                            '20%',
-                                            style: TextStyle(
-                                              fontFamily: 'Outfit',
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold,
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child:
+                                                          const Text('Tutup'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: CircularPercentIndicator(
+                                            percent: 0.5,
+                                            radius: 40,
+                                            lineWidth: 15,
+                                            animation: true,
+                                            progressColor: const Color.fromARGB(
+                                                255, 32, 146, 233),
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 193, 55, 45),
+                                            center: const Text(
+                                              '20%',
+                                              style: TextStyle(
+                                                fontFamily: 'Outfit',
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 10.0),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              const Divider(
-                                color: Colors.black,
-                                height: 30.0,
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  FittedBox(
-                                    fit: BoxFit
-                                        .scaleDown, // Mengatur teks agar sesuai dengan batas lebar
-                                    child: Text(
-                                      'Klik bel untuk mendapatkan notifikasi!',
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: Colors.black,
+                                        const SizedBox(width: 10.0),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5.0,
+                                ),
+                                const Divider(
+                                  color: Colors.black,
+                                  height: 30.0,
+                                ),
+                                const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    FittedBox(
+                                      fit: BoxFit
+                                          .scaleDown, // Mengatur teks agar sesuai dengan batas lebar
+                                      child: Text(
+                                        'Klik bel untuk mendapatkan notifikasi!',
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: Colors.black,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Icon(Icons.mark_email_unread_outlined),
-                                ],
-                              )
-                            ],
+                                    Icon(Icons.notification_add),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -329,7 +344,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Card(
-                        elevation: 5.0,
+                        elevation: 10.0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16.0),
                         ),
@@ -393,7 +408,7 @@ class HomePage extends StatelessWidget {
                   ),
                   Expanded(
                     child: Card(
-                      elevation: 5.0,
+                      elevation: 10.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16.0),
                       ),
@@ -460,7 +475,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Card(
-                      elevation: 5.0,
+                      elevation: 10.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16.0),
                       ),
@@ -523,7 +538,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(width: 10.0),
                   Expanded(
                     child: Card(
-                      elevation: 5.0,
+                      elevation: 10.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16.0),
                       ),

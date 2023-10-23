@@ -1,13 +1,14 @@
+import 'package:airqu/view/detail_info.dart';
 import 'package:airqu/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:airqu/widgets/splash.dart';
-import 'package:airqu/view/introduction.dart';
+
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+  const MyApp({super.key, Key? tes});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/', // Set initialRoute to '/'
       routes: {
-        '/': (context) => SplashScreenDelay(), // Use '/' as the initial route
+        '/': (context) =>
+            const SplashScreenDelay(), // Use '/' as the initial route
         // 'home': (context) => HomeScreen(),
         // 'login': (context) => LoginScreen(),
       },
