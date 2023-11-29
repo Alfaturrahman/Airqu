@@ -14,12 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/', // Set initialRoute to '/'
+      initialRoute: '/',
       routes: {
-        '/': (context) =>
-            const SplashScreenDelay(), // Use '/' as the initial route
-        // 'home': (context) => HomeScreen(),
-        // 'login': (context) => LoginScreen(),
+        '/': (context) => const SplashScreenDelay(),
       },
     );
   }
@@ -36,7 +33,7 @@ class SplashScreenDelay extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const SplashScreen();
         } else {
-          return const MyHomePage(); // Ganti dengan halaman beranda Anda.
+          return const MyHomePage();
         }
       },
     );
