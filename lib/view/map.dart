@@ -1,7 +1,9 @@
 import 'package:airqu/view/detail_info.dart';
+import 'package:airqu/widgets/mapbox.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:airqu/controller/aqi_service.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -28,18 +30,19 @@ class _MapPageState extends State<MapPage> {
             width: double.infinity,
             alignment: Alignment.center,
             padding: const EdgeInsets.all(16.0),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/map.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
+            // decoration: const BoxDecoration(
+            //   image: DecorationImage(
+            //     image: AssetImage('assets/map.jpg'),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(
                 height: 250,
                 child: Stack(
                   children: [
+                    const Mapbox(),
                     Positioned(
                       child: FutureBuilder<Map<String, dynamic>>(
                         future: aqiData,
