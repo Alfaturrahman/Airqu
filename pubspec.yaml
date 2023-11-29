@@ -40,6 +40,7 @@ dependencies:
   flutter_map: ^6.0.1
   latlong2: ^0.9.0
   mapbox_gl: ^0.16.0
+  location: ^5.0.3
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
     - assets/banner2.jpg
     - assets/indikator.png
     - assets/map.jpg
+    - assets/mapbox_access_token.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

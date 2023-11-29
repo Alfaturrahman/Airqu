@@ -26,6 +26,7 @@ class _MapPageState extends State<MapPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          const Mapbox(),
           Container(
             width: double.infinity,
             alignment: Alignment.center,
@@ -42,7 +43,6 @@ class _MapPageState extends State<MapPage> {
                 height: 250,
                 child: Stack(
                   children: [
-                    const Mapbox(),
                     Positioned(
                       child: FutureBuilder<Map<String, dynamic>>(
                         future: aqiData,
