@@ -36,11 +36,17 @@ dependencies:
   cupertino_icons: ^1.0.2
   percent_indicator: ^4.2.3
   extended_icon_button: ^1.0.0
-  http: ^1.1.0
   flutter_map: ^6.0.1
   latlong2: ^0.9.0
   mapbox_gl: ^0.16.0
   location: ^5.0.3
+  fl_chart: ^0.65.0
+  charts_flutter: ^0.11.0
+  http: ^1.1.0
+  webview_flutter: ^4.4.2
+  csv: ^5.1.1
+  intl: ^0.17.0
+  buttons_tabbar: ^1.3.8
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +74,7 @@ flutter:
     - assets/logo/logo-splash.png
     - assets/banner1.jpeg
     - assets/banner2.jpg
-    - assets/indikator.png
+    - assets/Indikator.png
     - assets/map.jpg
     - assets/mapbox_access_token.txt
 

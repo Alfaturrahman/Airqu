@@ -1,10 +1,13 @@
 import 'package:airqu/view/detail_info.dart';
+import 'package:airqu/view/notifcation.dart';
+import 'package:airqu/view/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:airqu/controller/aqi_service.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final Map<String, dynamic> aqiData; // Tambahkan ini
+  const HomePage({super.key, required this.aqiData});
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -45,7 +48,13 @@ class _HomePageState extends State<HomePage> {
                   Icons.mail,
                   color: Colors.black,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const NotificationPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(width: 10.0),
             ],
@@ -124,6 +133,10 @@ class _HomePageState extends State<HomePage> {
                             return Center(
                                 child: Text('Error: ${snapshot.error}'));
                           } else {
+                            var pm25Data =
+                                snapshot.data!['data']['iaqi']['pm25'];
+                            var pm25Value =
+                                pm25Data != null ? pm25Data['v'] : 'N/A';
                             var city = snapshot.data!['data']['city']['name'];
                             var aqiValue = snapshot.data!['data']['aqi'] is int
                                 ? snapshot.data!['data']['aqi']
@@ -131,20 +144,35 @@ class _HomePageState extends State<HomePage> {
                                         .toString()) ??
                                     0;
                             String aqiStatus;
+                            String aqiWarn;
                             Color statusColor;
                             if (aqiValue <= 50) {
                               aqiStatus = "BAIK";
                               statusColor = Colors.green;
+                              aqiWarn = "Kualitas udara baik";
                             } else if (aqiValue <= 100) {
                               aqiStatus = "SEDANG";
                               statusColor = Colors.yellow;
+                              aqiWarn = "Kualitas udara cukup baik";
                             } else if (aqiValue <= 150) {
                               aqiStatus = "TIDAK SEHAT";
                               statusColor = Colors.orange;
+                              aqiWarn = "Kualitas udara tidak sehat";
                             } else {
                               aqiStatus = "SANGAT TIDAK SEHAT";
                               statusColor = Colors.red;
+                              aqiWarn = "Kualitas udara sangat tidak sehat";
                             }
+                            var lastUpdatedTimeString =
+                                snapshot.data!['data']['time']['s'];
+                            var lastUpdatedTime =
+                                DateTime.parse(lastUpdatedTimeString);
+                            var formattedLastUpdatedTime =
+                                '${lastUpdatedTime.day}/${lastUpdatedTime.month}/${lastUpdatedTime.year} ${lastUpdatedTime.hour}:${lastUpdatedTime.minute}:${lastUpdatedTime.second}';
+                            var temperature =
+                                snapshot.data!['data']['iaqi']['t'];
+                            var temperatureValue =
+                                temperature != null ? temperature['v'] : 'N/A';
                             return SizedBox(
                               height: 250,
                               child: Stack(
@@ -153,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                                     top: -5,
                                     left: 20,
                                     child: Card(
-                                      color: Colors.red[600],
+                                      color: statusColor,
                                       elevation: 4.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
@@ -163,10 +191,10 @@ class _HomePageState extends State<HomePage> {
                                         width: screenWidth * 0.8,
                                         height: 100.0,
                                         padding: const EdgeInsets.all(16.0),
-                                        child: const Text(
-                                          'Terakhir Diperbaharui 13.15, 18 Okt 2023',
-                                          style: TextStyle(
-                                              color: Colors.white,
+                                        child: Text(
+                                          "Terakhir diperbarui : $formattedLastUpdatedTime",
+                                          style: const TextStyle(
+                                              color: Colors.grey,
                                               fontSize: 14.0,
                                               fontWeight: FontWeight.w500),
                                         ),
@@ -225,25 +253,24 @@ class _HomePageState extends State<HomePage> {
                                                         children: [
                                                           Text(
                                                             aqiStatus,
-                                                            style:
-                                                                const TextStyle(
+                                                            style: TextStyle(
                                                               fontSize: 25.0,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w700,
-                                                              color: Colors.red,
+                                                              color:
+                                                                  statusColor,
                                                             ),
                                                           ),
                                                         ],
                                                       ),
-                                                      const Column(
+                                                      Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                              'Untuk Group Sensitif'),
-                                                          Text('516 Mengikuti'),
+                                                              'Suhu : $temperatureValue °C'),
                                                         ],
                                                       ),
                                                     ],
@@ -334,32 +361,67 @@ class _HomePageState extends State<HomePage> {
                                                             },
                                                           );
                                                         },
-                                                        child:
+                                                        child: Row(
+                                                          children: [
                                                             CircularPercentIndicator(
-                                                          percent: 0.5,
-                                                          radius: 40,
-                                                          lineWidth: 15,
-                                                          animation: true,
-                                                          progressColor:
-                                                              const Color
-                                                                  .fromARGB(255,
-                                                                  32, 146, 233),
-                                                          backgroundColor:
-                                                              const Color
-                                                                  .fromARGB(255,
-                                                                  193, 55, 45),
-                                                          center: Text(
-                                                            aqiValue.toString(),
-                                                            style:
-                                                                const TextStyle(
-                                                              fontFamily:
-                                                                  'Outfit',
-                                                              fontSize: 10,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
+                                                              percent:
+                                                                  aqiValue /
+                                                                      300,
+                                                              radius: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.09,
+                                                              lineWidth: 10,
+                                                              animation: true,
+                                                              progressColor:
+                                                                  statusColor,
+                                                              center: Text(
+                                                                aqiValue
+                                                                    .toString(),
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
                                                             ),
-                                                          ),
+                                                            const SizedBox(
+                                                                width: 10),
+                                                            CircularPercentIndicator(
+                                                              percent:
+                                                                  aqiValue /
+                                                                      250.4,
+                                                              radius: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.09,
+                                                              lineWidth: 10,
+                                                              animation: true,
+                                                              progressColor:
+                                                                  Colors.grey,
+                                                              backgroundColor:
+                                                                  statusColor,
+                                                              center: Text(
+                                                                pm25Value
+                                                                    .toString(),
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                       const SizedBox(
@@ -375,7 +437,7 @@ class _HomePageState extends State<HomePage> {
                                                 color: Colors.black,
                                                 height: 30.0,
                                               ),
-                                              const Row(
+                                              Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
@@ -383,14 +445,13 @@ class _HomePageState extends State<HomePage> {
                                                   FittedBox(
                                                     fit: BoxFit.scaleDown,
                                                     child: Text(
-                                                      'Klik bel untuk mendapatkan notifikasi!',
-                                                      style: TextStyle(
-                                                        fontSize: 14.0,
+                                                      aqiWarn,
+                                                      style: const TextStyle(
+                                                        fontSize: 12.0,
                                                         color: Colors.black,
                                                       ),
                                                     ),
                                                   ),
-                                                  Icon(Icons.notification_add),
                                                 ],
                                               )
                                             ],
@@ -528,7 +589,7 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               'Kurang Sehat',
                               style: TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: 15.0,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -684,7 +745,7 @@ class _HomePageState extends State<HomePage> {
                   left: 20.0,
                 ),
                 child: Text(
-                  'Berita',
+                  'Prediksi Cuaca',
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 18.0,
@@ -692,74 +753,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 130,
-                child: Card(
-                  elevation: 4.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  child: Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(16.0),
-                          topRight: Radius.circular(16.0),
-                        ),
-                        child: Image.asset(
-                          'assets/banner1.jpeg',
-                          width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          width: screenWidth * 1,
-                          height: 60,
-                          padding:
-                              const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.5),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16.0),
-                              topRight: Radius.circular(16.0),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Mengapa Reboisasi itu penting?',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  shape: const CircleBorder(),
-                                  padding: const EdgeInsets.all(8.0),
-                                  minimumSize: const Size(40, 40),
-                                  backgroundColor: Colors.green,
-                                ),
-                                child:
-                                    const Icon(Icons.arrow_right_alt_outlined),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
+              // const SizedBox(
+              //   height: 15.0,
+              // ),
+              const Weather()
             ],
           ),
         ),

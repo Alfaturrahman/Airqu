@@ -62,20 +62,35 @@ class _MapPageState extends State<MapPage> {
                                         .toString()) ??
                                     0;
                             String aqiStatus;
+                            String aqiWarn;
                             Color statusColor;
                             if (aqiValue <= 50) {
                               aqiStatus = "BAIK";
                               statusColor = Colors.green;
+                              aqiWarn = "Kualitas udara baik";
                             } else if (aqiValue <= 100) {
                               aqiStatus = "SEDANG";
                               statusColor = Colors.yellow;
+                              aqiWarn = "Kualitas udara cukup baik";
                             } else if (aqiValue <= 150) {
                               aqiStatus = "TIDAK SEHAT";
                               statusColor = Colors.orange;
+                              aqiWarn = "Kualitas udara tidak sehat";
                             } else {
                               aqiStatus = "SANGAT TIDAK SEHAT";
                               statusColor = Colors.red;
+                              aqiWarn = "Kualitas udara sangat tidak sehat";
                             }
+                            var lastUpdatedTimeString =
+                                snapshot.data!['data']['time']['s'];
+                            var lastUpdatedTime =
+                                DateTime.parse(lastUpdatedTimeString);
+                            var formattedLastUpdatedTime =
+                                '${lastUpdatedTime.day}/${lastUpdatedTime.month}/${lastUpdatedTime.year} ${lastUpdatedTime.hour}:${lastUpdatedTime.minute}:${lastUpdatedTime.second}';
+                            var temperature =
+                                snapshot.data!['data']['iaqi']['t'];
+                            var temperatureValue =
+                                temperature != null ? temperature['v'] : 'N/A';
                             return SizedBox(
                               height: 250,
                               child: Stack(
@@ -84,7 +99,7 @@ class _MapPageState extends State<MapPage> {
                                     top: -5,
                                     left: 20,
                                     child: Card(
-                                      color: Colors.red[600],
+                                      color: statusColor,
                                       elevation: 4.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
@@ -94,10 +109,10 @@ class _MapPageState extends State<MapPage> {
                                         width: screenWidth * 0.8,
                                         height: 100.0,
                                         padding: const EdgeInsets.all(16.0),
-                                        child: const Text(
-                                          'Terakhir Diperbaharui 13.15, 18 Okt 2023',
-                                          style: TextStyle(
-                                              color: Colors.white,
+                                        child: Text(
+                                          'Terakhir diperbarui : $formattedLastUpdatedTime',
+                                          style: const TextStyle(
+                                              color: Colors.grey,
                                               fontSize: 14.0,
                                               fontWeight: FontWeight.w500),
                                         ),
@@ -156,25 +171,25 @@ class _MapPageState extends State<MapPage> {
                                                         children: [
                                                           Text(
                                                             aqiStatus,
-                                                            style:
-                                                                const TextStyle(
+                                                            style: TextStyle(
                                                               fontSize: 25.0,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w700,
-                                                              color: Colors.red,
+                                                              color:
+                                                                  statusColor,
                                                             ),
                                                           ),
                                                         ],
                                                       ),
-                                                      const Column(
+                                                      Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
+                                                          Text(aqiWarn),
                                                           Text(
-                                                              'Untuk Group Sensitif'),
-                                                          Text('516 Mengikuti'),
+                                                              'suhu : $temperatureValue °C'),
                                                         ],
                                                       ),
                                                     ],
@@ -272,13 +287,7 @@ class _MapPageState extends State<MapPage> {
                                                           lineWidth: 15,
                                                           animation: true,
                                                           progressColor:
-                                                              const Color
-                                                                  .fromARGB(255,
-                                                                  32, 146, 233),
-                                                          backgroundColor:
-                                                              const Color
-                                                                  .fromARGB(255,
-                                                                  193, 55, 45),
+                                                              statusColor,
                                                           center: Text(
                                                             aqiValue.toString(),
                                                             style:
@@ -316,7 +325,7 @@ class _MapPageState extends State<MapPage> {
                                                     child: Text(
                                                       'Klik bel untuk mendapatkan notifikasi!',
                                                       style: TextStyle(
-                                                        fontSize: 14.0,
+                                                        fontSize: 12.0,
                                                         color: Colors.black,
                                                       ),
                                                     ),
